@@ -1,0 +1,53 @@
+
+
+## CORE
+
+sandbox_schema, demo_name+'_filter_items'
+
+prod_schema, demo_name+"_client_specs"
+prod_schema, demo_name+'_panel_stats'
+prod_schema, demo_name+'_sample_size_guardrail'
+
+
+## ANALYSIS
+
+# GEO
+prod_schema, demo_name+'_geographic_analysis'
+
+
+# MARKET SHARE
+# + LOOP ('+column
+prod_schema, table_name, market_share_for_column
+
+# + LOOP ('+column
+prod_schema, table_name_nrf, market_share_for_column_nrf
+
+# + LOOP ('+column
+prod_schema, table_name_std, market_share_for_column_std
+
+# PRO INSIGHTS
+prod_schema, demo_name+'_pro_insights'
+
+
+# PRODUCT ANALYSIS
+prod_schema, demo_name+'_sku_analysis'
+prod_schema, demo_name+'_sku_time_series'
+prod_schema, demo_name+'_sku_detail'
+
+
+# RET LEAKAGE
+prod_schema, demo_name+'_leakage_users'
+prod_schema, demo_name+'_leakage_retailer'
+prod_schema, demo_name+'_category_closure'
+prod_schema, demo_name+'_leakage_product'
+prod_schema, demo_name+'_market_share'
+
+
+# SHOPPER INSIGHTS
+prod_schema, demo_name+'_filter_items'
+
+
+# TARIFFS
+prod_schema, demo_name+'_tariffs_month_grouping'
+prod_schema, demo_name+'_tariffs_month_stable_products_list'
+prod_schema, demo_name+'_tariffs_month_product_filled_prices'
