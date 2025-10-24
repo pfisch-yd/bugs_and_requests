@@ -11,13 +11,34 @@
 # MAGIC **Solution**: Apply COALESCE to replace NULL values with 'N/A' for all special attribute columns.
 # MAGIC
 # MAGIC **Related**: Slack conversation - Oct 23, 2025
-# MAGIC
-# MAGIC **Human Commentary** : Claude has created a code that cover more things than I would. I haven't tested the "fix from everyone". But I tested the main function and I liked it.
+
+# COMMAND ----------
+
+# MAGIC %run /setup_serverless
 
 # COMMAND ----------
 
 import pyspark.sql.functions as F
 from pyspark.sql import DataFrame
+from pyspark.sql.functions import col
+from pyspark.sql.functions import col
+import ast
+from datetime import datetime
+from yipit_databricks_utils.helpers.gsheets import read_gsheet
+from pyspark.sql.window import Window
+from pyspark.sql.functions import row_number, lit
+from pyspark.sql.functions import lower
+import pandas as pd
+
+from datetime import datetime, timedelta
+import calendar
+
+import pandas as pd
+from pyspark.sql import SparkSession
+
+from pyspark.sql.functions import to_timestamp
+
+from yipit_databricks_utils.future import create_table
 
 # COMMAND ----------
 
@@ -52,8 +73,6 @@ def standardize_special_attributes(
 
     # If no columns specified, try to identify special attribute columns
     if special_attribute_columns is None:
-        # Common special attribute column patterns
-        print("No special attribute columns detected. Returning original DataFrame.")
         return df
 
     # Apply COALESCE to each special attribute column
@@ -134,7 +153,7 @@ def apply_standardization_to_filter_items(
     special_attribute_columns: list = None,
     null_replacement: str = 'N/A',
     overwrite: bool = True,
-    validate: bool = False
+    validate: bool = True
 ) -> DataFrame:
     """
     Apply special attribute standardization to an existing filter_items table.
@@ -175,7 +194,7 @@ def apply_standardization_to_filter_items(
     # Overwrite table if requested
     if overwrite:
         print(f"\nOverwriting table: {schema_name}.{table_name}")
-        create_table(schema_name, table_name, df_standardized, overwrite=True)
+        df_standardized.write.mode("overwrite").saveAsTable(f"{schema_name}.{table_name}")
         print("✅ Table successfully updated")
 
     return df_standardized
@@ -373,3 +392,165 @@ def fix_all_client_special_attributes(
 # MAGIC
 # MAGIC ### Option 3: Integrate into setup.py for future pipelines
 # MAGIC See "Example Usage - Integration with Setup" section above
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC # Let's test this out
+
+# COMMAND ----------
+
+schema_name = "ydx_internal_analysts_sandbox"
+demo_name = "masco_v38"
+table_suffix = "_filter_items"
+table_name=f"{demo_name}{table_suffix}"
+special_attribute_columns=['shower_door_type']
+null_replacement='N/A'
+overwrite=True
+validate=True
+
+# COMMAND ----------
+
+apply_standardization_to_filter_items(
+    schema_name=schema_name,
+    table_name=f"{demo_name}{table_name}",
+    special_attribute_columns=['shower_door_type'],  # Add other columns as needed
+    null_replacement='N/A',
+    overwrite=True,
+    validate=True
+)
+
+# COMMAND ----------
+
+print(f"Loading table: {schema_name}.{table_name}")
+df = spark.table(f"{schema_name}.{table_name}")
+
+
+# COMMAND ----------
+
+# If no columns specified, try to identify special attribute columns
+if special_attribute_columns is None:
+    # Common special attribute column patterns
+    attribute_patterns = [
+        '_type', '_finish', '_style', '_material', '_color',
+        '_size', '_feature', '_category', 'attribute'
+    ]
+
+    special_attribute_columns = [
+        col for col in df.columns
+        if any(pattern in col.lower() for pattern in attribute_patterns)
+    ]
+
+    if special_attribute_columns:
+        print(f"Auto-detected special attribute columns: {special_attribute_columns}")
+    else:
+        print("No special attribute columns detected. Returning original DataFrame.")
+else:
+    print("Yes special attribute columns were detected. Continueing...")
+
+# COMMAND ----------
+
+
+
+
+
+# Apply COALESCE to each special attribute column
+print(f"Standardizing {len(special_attribute_columns)} special attribute column(s)...")
+
+for col in special_attribute_columns:
+    if col in df.columns:
+        df = df.withColumn(
+            col,
+            F.coalesce(F.col(col), F.lit(null_replacement))
+        )
+        print(f"  ✓ Standardized column: {col}")
+    else:
+        print(f"  ⚠ Warning: Column '{col}' not found in DataFrame. Skipping.")
+
+# COMMAND ----------
+
+df_standardized = df
+
+# COMMAND ----------
+
+print(validate, special_attribute_columns)
+
+# COMMAND ----------
+
+
+validation_results = {}
+
+print("Validating special attribute standardization...")
+print("=" * 60)
+
+# COMMAND ----------
+
+for col in special_attribute_columns:
+    if col not in df.columns:
+        validation_results[col] = {"status": "MISSING", "null_count": None}
+        print(f"❌ Column '{col}' not found in DataFrame")
+        continue
+
+    # Count NULL values
+    null_count = df.filter(F.col(col).isNull()).count()
+    total_count = df.count()
+
+    if null_count == 0:
+        validation_results[col] = {
+            "status": "PASS",
+            "null_count": 0,
+            "total_count": total_count
+        }
+        print(f"✅ Column '{col}': No NULL values (total rows: {total_count})")
+    else:
+        validation_results[col] = {
+            "status": "FAIL",
+            "null_count": null_count,
+            "total_count": total_count,
+            "null_percentage": round((null_count / total_count) * 100, 2)
+        }
+        print(f"❌ Column '{col}': {null_count} NULL values found "
+                f"({validation_results[col]['null_percentage']}% of total)")
+
+print("=" * 60)
+
+# COMMAND ----------
+
+for col in special_attribute_columns:
+    if col not in df.columns:
+        validation_results[col] = {"status": "MISSING", "null_count": None}
+        print(f"❌ Column '{col}' not found in DataFrame")
+        continue
+
+    # Count NULL values
+    null_count = df.filter(F.col(col).isNull()).count()
+    total_count = df.count()
+
+    if null_count == 0:
+        validation_results[col] = {
+            "status": "PASS",
+            "null_count": 0,
+            "total_count": total_count
+        }
+        print(f"✅ Column '{col}': No NULL values (total rows: {total_count})")
+    else:
+        validation_results[col] = {
+            "status": "FAIL",
+            "null_count": null_count,
+            "total_count": total_count,
+            "null_percentage": round((null_count / total_count) * 100, 2)
+        }
+        print(f"❌ Column '{col}': {null_count} NULL values found "
+                f"({validation_results[col]['null_percentage']}% of total)")
+
+print("=" * 60)
+
+return validation_results
+
+# COMMAND ----------
+
+# Overwrite table if requested
+if overwrite:
+    print(f"\nOverwriting table: {schema_name}.{table_name}")
+    create_table(schema_name, table_name, df_standardized, overwrite=True)
+    print("✅ Table successfully updated")
