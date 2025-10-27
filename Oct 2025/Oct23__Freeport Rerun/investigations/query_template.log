@@ -1,0 +1,255 @@
+2025-10-24 12:40:02,646 - INFO - Found matching template: 653
+2025-10-24 12:41:41,533 - INFO - Found matching template: 653
+2025-10-24 12:42:44,237 - INFO - Exception while sending command.
+Traceback (most recent call last):
+  File "/databricks/spark/python/lib/py4j-0.10.9.9-src.zip/py4j/clientserver.py", line 527, in send_command
+    self.socket.sendall(command.encode("utf-8"))
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/databricks/spark/python/lib/py4j-0.10.9.9-src.zip/py4j/java_gateway.py", line 1038, in send_command
+    response = connection.send_command(command)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/databricks/spark/python/lib/py4j-0.10.9.9-src.zip/py4j/clientserver.py", line 530, in send_command
+    raise Py4JNetworkError(
+py4j.protocol.Py4JNetworkError: Error while sending
+2025-10-24 12:42:45,115 - INFO - Exception while sending command.
+Traceback (most recent call last):
+  File "/databricks/spark/python/lib/py4j-0.10.9.9-src.zip/py4j/clientserver.py", line 527, in send_command
+    self.socket.sendall(command.encode("utf-8"))
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/databricks/spark/python/lib/py4j-0.10.9.9-src.zip/py4j/java_gateway.py", line 1038, in send_command
+    response = connection.send_command(command)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/databricks/spark/python/lib/py4j-0.10.9.9-src.zip/py4j/clientserver.py", line 530, in send_command
+    raise Py4JNetworkError(
+py4j.protocol.Py4JNetworkError: Error while sending
+2025-10-24 12:42:49,383 - INFO - Exception while sending command.
+Traceback (most recent call last):
+  File "/databricks/spark/python/lib/py4j-0.10.9.9-src.zip/py4j/clientserver.py", line 527, in send_command
+    self.socket.sendall(command.encode("utf-8"))
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/databricks/spark/python/lib/py4j-0.10.9.9-src.zip/py4j/java_gateway.py", line 1038, in send_command
+    response = connection.send_command(command)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/databricks/spark/python/lib/py4j-0.10.9.9-src.zip/py4j/clientserver.py", line 530, in send_command
+    raise Py4JNetworkError(
+py4j.protocol.Py4JNetworkError: Error while sending
+2025-10-24 12:43:20,536 - INFO - Exception while sending command.
+Traceback (most recent call last):
+  File "/databricks/spark/python/lib/py4j-0.10.9.9-src.zip/py4j/clientserver.py", line 527, in send_command
+    self.socket.sendall(command.encode("utf-8"))
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/databricks/spark/python/lib/py4j-0.10.9.9-src.zip/py4j/java_gateway.py", line 1038, in send_command
+    response = connection.send_command(command)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/databricks/spark/python/lib/py4j-0.10.9.9-src.zip/py4j/clientserver.py", line 530, in send_command
+    raise Py4JNetworkError(
+py4j.protocol.Py4JNetworkError: Error while sending
+2025-10-24 12:44:19,178 - INFO - Exception while sending command.
+Traceback (most recent call last):
+  File "/databricks/spark/python/lib/py4j-0.10.9.9-src.zip/py4j/clientserver.py", line 527, in send_command
+    self.socket.sendall(command.encode("utf-8"))
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/databricks/spark/python/lib/py4j-0.10.9.9-src.zip/py4j/java_gateway.py", line 1038, in send_command
+    response = connection.send_command(command)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/databricks/spark/python/lib/py4j-0.10.9.9-src.zip/py4j/clientserver.py", line 530, in send_command
+    raise Py4JNetworkError(
+py4j.protocol.Py4JNetworkError: Error while sending
+2025-10-24 12:44:20,144 - INFO - Exception while sending command.
+Traceback (most recent call last):
+  File "/databricks/spark/python/lib/py4j-0.10.9.9-src.zip/py4j/clientserver.py", line 527, in send_command
+    self.socket.sendall(command.encode("utf-8"))
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/databricks/spark/python/lib/py4j-0.10.9.9-src.zip/py4j/java_gateway.py", line 1038, in send_command
+    response = connection.send_command(command)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/databricks/spark/python/lib/py4j-0.10.9.9-src.zip/py4j/clientserver.py", line 530, in send_command
+    raise Py4JNetworkError(
+py4j.protocol.Py4JNetworkError: Error while sending
+2025-10-24 12:45:00,534 - INFO - Exception while sending command.
+Traceback (most recent call last):
+  File "/databricks/spark/python/lib/py4j-0.10.9.9-src.zip/py4j/clientserver.py", line 527, in send_command
+    self.socket.sendall(command.encode("utf-8"))
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/databricks/spark/python/lib/py4j-0.10.9.9-src.zip/py4j/java_gateway.py", line 1038, in send_command
+    response = connection.send_command(command)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/databricks/spark/python/lib/py4j-0.10.9.9-src.zip/py4j/clientserver.py", line 530, in send_command
+    raise Py4JNetworkError(
+py4j.protocol.Py4JNetworkError: Error while sending
+2025-10-24 12:46:08,605 - WARNING - FPModel for corporate_geo_triplecrowncentral_v38_deliverable exists, returning existing model
+2025-10-24 12:46:08,817 - INFO - Checking for valid queries and schema compatibility for deliverable
+2025-10-24 12:46:08,941 - INFO - Checking for schema changes in FPModel 15315
+2025-10-24 12:46:11,706 - INFO - Evaluating schema changes ..
+2025-10-24 12:46:12,974 - INFO - Creating FPModelVersion for 'corporate_geo_triplecrowncentral_v38_deliverable' if it does not exist for the specified configuration ..
+2025-10-24 12:46:13,601 - INFO - Waiting for FPModelVersion 698129 to complete ..
+2025-10-24 12:46:13,941 - INFO - Current record state is None. Checking again in 30 seconds ..
+2025-10-24 12:46:44,286 - INFO - Current record state is running. Checking again in 30 seconds ..
+2025-10-24 12:47:14,626 - INFO - Current record state is running. Checking again in 30 seconds ..
+2025-10-24 12:47:44,989 - INFO - Current record state is running. Checking again in 30 seconds ..
+2025-10-24 12:48:15,351 - INFO - Record was successfully processed
+2025-10-24 12:48:54,482 - INFO - Exception while sending command.
+Traceback (most recent call last):
+  File "/databricks/spark/python/lib/py4j-0.10.9.9-src.zip/py4j/clientserver.py", line 527, in send_command
+    self.socket.sendall(command.encode("utf-8"))
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/databricks/spark/python/lib/py4j-0.10.9.9-src.zip/py4j/java_gateway.py", line 1038, in send_command
+    response = connection.send_command(command)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/databricks/spark/python/lib/py4j-0.10.9.9-src.zip/py4j/clientserver.py", line 530, in send_command
+    raise Py4JNetworkError(
+py4j.protocol.Py4JNetworkError: Error while sending
+2025-10-24 12:49:37,902 - ERROR - GRPC Error received
+Traceback (most recent call last):
+  File "/local_disk0/.ephemeral_nfs/envs/pythonEnv-ed37d050-15bc-4c6c-a7b2-f8e697fb902f/lib/python3.12/site-packages/pyspark/sql/connect/client/core.py", line 1902, in _execute_and_fetch_as_iterator
+    for b in generator:
+  File "<frozen _collections_abc>", line 356, in __next__
+  File "/local_disk0/.ephemeral_nfs/envs/pythonEnv-ed37d050-15bc-4c6c-a7b2-f8e697fb902f/lib/python3.12/site-packages/pyspark/sql/connect/client/reattach.py", line 141, in send
+    if not self._has_next():
+           ^^^^^^^^^^^^^^^^
+  File "/local_disk0/.ephemeral_nfs/envs/pythonEnv-ed37d050-15bc-4c6c-a7b2-f8e697fb902f/lib/python3.12/site-packages/pyspark/sql/connect/client/reattach.py", line 202, in _has_next
+    raise e
+  File "/local_disk0/.ephemeral_nfs/envs/pythonEnv-ed37d050-15bc-4c6c-a7b2-f8e697fb902f/lib/python3.12/site-packages/pyspark/sql/connect/client/reattach.py", line 174, in _has_next
+    self._current = self._call_iter(
+                    ^^^^^^^^^^^^^^^^
+  File "/local_disk0/.ephemeral_nfs/envs/pythonEnv-ed37d050-15bc-4c6c-a7b2-f8e697fb902f/lib/python3.12/site-packages/pyspark/sql/connect/client/reattach.py", line 299, in _call_iter
+    raise e
+  File "/local_disk0/.ephemeral_nfs/envs/pythonEnv-ed37d050-15bc-4c6c-a7b2-f8e697fb902f/lib/python3.12/site-packages/pyspark/sql/connect/client/reattach.py", line 279, in _call_iter
+    return iter_fun()
+           ^^^^^^^^^^
+  File "/local_disk0/.ephemeral_nfs/envs/pythonEnv-ed37d050-15bc-4c6c-a7b2-f8e697fb902f/lib/python3.12/site-packages/pyspark/sql/connect/client/reattach.py", line 175, in <lambda>
+    lambda: next(self._iterator)  # type: ignore[arg-type]
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/local_disk0/.ephemeral_nfs/envs/pythonEnv-ed37d050-15bc-4c6c-a7b2-f8e697fb902f/lib/python3.12/site-packages/pyspark/sql/connect/client/core.py", line 650, in __iter__
+    for response in self._call:
+  File "/local_disk0/.ephemeral_nfs/envs/pythonEnv-ed37d050-15bc-4c6c-a7b2-f8e697fb902f/lib/python3.12/site-packages/grpc/_channel.py", line 543, in __next__
+    return self._next()
+           ^^^^^^^^^^^^
+  File "/local_disk0/.ephemeral_nfs/envs/pythonEnv-ed37d050-15bc-4c6c-a7b2-f8e697fb902f/lib/python3.12/site-packages/grpc/_channel.py", line 969, in _next
+    raise self
+grpc._channel._MultiThreadedRendezvous: <_MultiThreadedRendezvous of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "[TABLE_OR_VIEW_NOT_FOUND] The table or view `yd_fp_corporate_staging`.`ydx_internal_analysts_gold`.`triplecrowncentral_v38_geographic_analysis__dmv__002` cannot be found. Verify the spelling and correctness of the schema and catalog.
+If you did not qualify the name with a schema, verify the current_schema() output, or qualify the name with the correct schema and catalog.
+To tolerate the error on drop use DROP VIEW IF EXISTS or DROP TABLE IF EXISTS. SQLSTATE: 42P01; line 1 pos 14;
+'Project [*]
++- 'UnresolvedRelation [yd_fp_corporate_staging, ydx_internal_analysts_gold, triplecrowncentral_v38_geographic_analysis__dmv__002], [], false
+"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_message:"[TABLE_OR_VIEW_NOT_FOUND] The table or view `yd_fp_corporate_staging`.`ydx_internal_analysts_gold`.`triplecrowncentral_v38_geographic_analysis__dmv__002` cannot be found. Verify the spelling and correctness of the schema and catalog.\nIf you did not qualify the name with a schema, verify the current_schema() output, or qualify the name with the correct schema and catalog.\nTo tolerate the error on drop use DROP VIEW IF EXISTS or DROP TABLE IF EXISTS. SQLSTATE: 42P01; line 1 pos 14;\n\'Project [*]\n+- \'UnresolvedRelation [yd_fp_corporate_staging, ydx_internal_analysts_gold, triplecrowncentral_v38_geographic_analysis__dmv__002], [], false\n", grpc_status:13}"
+>
+2025-10-24 12:50:05,133 - ERROR - GRPC Error received
+Traceback (most recent call last):
+  File "/local_disk0/.ephemeral_nfs/envs/pythonEnv-ed37d050-15bc-4c6c-a7b2-f8e697fb902f/lib/python3.12/site-packages/pyspark/sql/connect/client/core.py", line 1902, in _execute_and_fetch_as_iterator
+    for b in generator:
+  File "<frozen _collections_abc>", line 356, in __next__
+  File "/local_disk0/.ephemeral_nfs/envs/pythonEnv-ed37d050-15bc-4c6c-a7b2-f8e697fb902f/lib/python3.12/site-packages/pyspark/sql/connect/client/reattach.py", line 141, in send
+    if not self._has_next():
+           ^^^^^^^^^^^^^^^^
+  File "/local_disk0/.ephemeral_nfs/envs/pythonEnv-ed37d050-15bc-4c6c-a7b2-f8e697fb902f/lib/python3.12/site-packages/pyspark/sql/connect/client/reattach.py", line 202, in _has_next
+    raise e
+  File "/local_disk0/.ephemeral_nfs/envs/pythonEnv-ed37d050-15bc-4c6c-a7b2-f8e697fb902f/lib/python3.12/site-packages/pyspark/sql/connect/client/reattach.py", line 174, in _has_next
+    self._current = self._call_iter(
+                    ^^^^^^^^^^^^^^^^
+  File "/local_disk0/.ephemeral_nfs/envs/pythonEnv-ed37d050-15bc-4c6c-a7b2-f8e697fb902f/lib/python3.12/site-packages/pyspark/sql/connect/client/reattach.py", line 299, in _call_iter
+    raise e
+  File "/local_disk0/.ephemeral_nfs/envs/pythonEnv-ed37d050-15bc-4c6c-a7b2-f8e697fb902f/lib/python3.12/site-packages/pyspark/sql/connect/client/reattach.py", line 279, in _call_iter
+    return iter_fun()
+           ^^^^^^^^^^
+  File "/local_disk0/.ephemeral_nfs/envs/pythonEnv-ed37d050-15bc-4c6c-a7b2-f8e697fb902f/lib/python3.12/site-packages/pyspark/sql/connect/client/reattach.py", line 175, in <lambda>
+    lambda: next(self._iterator)  # type: ignore[arg-type]
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/local_disk0/.ephemeral_nfs/envs/pythonEnv-ed37d050-15bc-4c6c-a7b2-f8e697fb902f/lib/python3.12/site-packages/pyspark/sql/connect/client/core.py", line 650, in __iter__
+    for response in self._call:
+  File "/local_disk0/.ephemeral_nfs/envs/pythonEnv-ed37d050-15bc-4c6c-a7b2-f8e697fb902f/lib/python3.12/site-packages/grpc/_channel.py", line 543, in __next__
+    return self._next()
+           ^^^^^^^^^^^^
+  File "/local_disk0/.ephemeral_nfs/envs/pythonEnv-ed37d050-15bc-4c6c-a7b2-f8e697fb902f/lib/python3.12/site-packages/grpc/_channel.py", line 969, in _next
+    raise self
+grpc._channel._MultiThreadedRendezvous: <_MultiThreadedRendezvous of RPC that terminated with:
+	status = StatusCode.INTERNAL
+	details = "[TABLE_OR_VIEW_NOT_FOUND] The table or view `yd_fp_corporate_staging`.`ydx_internal_analysts_gold`.`triplecrowncentral_v38_geographic_analysis__dmv__001` cannot be found. Verify the spelling and correctness of the schema and catalog.
+If you did not qualify the name with a schema, verify the current_schema() output, or qualify the name with the correct schema and catalog.
+To tolerate the error on drop use DROP VIEW IF EXISTS or DROP TABLE IF EXISTS. SQLSTATE: 42P01; line 1 pos 14;
+'Project [*]
++- 'UnresolvedRelation [yd_fp_corporate_staging, ydx_internal_analysts_gold, triplecrowncentral_v38_geographic_analysis__dmv__001], [], false
+"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_status:13, grpc_message:"[TABLE_OR_VIEW_NOT_FOUND] The table or view `yd_fp_corporate_staging`.`ydx_internal_analysts_gold`.`triplecrowncentral_v38_geographic_analysis__dmv__001` cannot be found. Verify the spelling and correctness of the schema and catalog.\nIf you did not qualify the name with a schema, verify the current_schema() output, or qualify the name with the correct schema and catalog.\nTo tolerate the error on drop use DROP VIEW IF EXISTS or DROP TABLE IF EXISTS. SQLSTATE: 42P01; line 1 pos 14;\n\'Project [*]\n+- \'UnresolvedRelation [yd_fp_corporate_staging, ydx_internal_analysts_gold, triplecrowncentral_v38_geographic_analysis__dmv__001], [], false\n"}"
+>
+2025-10-24 12:52:55,213 - INFO - Exception while sending command.
+Traceback (most recent call last):
+  File "/databricks/spark/python/lib/py4j-0.10.9.9-src.zip/py4j/clientserver.py", line 527, in send_command
+    self.socket.sendall(command.encode("utf-8"))
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/databricks/spark/python/lib/py4j-0.10.9.9-src.zip/py4j/java_gateway.py", line 1038, in send_command
+    response = connection.send_command(command)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/databricks/spark/python/lib/py4j-0.10.9.9-src.zip/py4j/clientserver.py", line 530, in send_command
+    raise Py4JNetworkError(
+py4j.protocol.Py4JNetworkError: Error while sending
+2025-10-24 12:54:56,654 - INFO - Found matching template: 653
+2025-10-24 12:55:38,573 - INFO - Found matching template: 3222
+2025-10-24 12:56:27,448 - INFO - FPModel corporate_geo_testtriplecrowncentral_v38_deliverable does not exist, creating new model ..
+2025-10-24 12:56:27,983 - INFO - Checking for valid queries and schema compatibility for deliverable
+2025-10-24 12:56:28,103 - INFO - Checking for schema changes in FPModel 17896
+2025-10-24 12:56:29,418 - INFO - Creating FPModelVersion for 'corporate_geo_testtriplecrowncentral_v38_deliverable' if it does not exist for the specified configuration ..
+2025-10-24 12:56:29,733 - ERROR - Freeport API call to /api/v1/data_model/fp_model_version/ failed (400). Error message:
+2025-10-24 12:56:29,734 - ERROR - {"matching_fp_model_id":"15315","fp_target":["Requested target is already in use by another fp_model. Select a different target."]}
+2025-10-24 13:13:44,068 - INFO - Found matching template: 3222
+2025-10-24 13:13:50,753 - WARNING - FPModel for corporate_geo_testtriplecrowncentral_v38_deliverable exists, returning existing model
+2025-10-24 13:13:50,979 - INFO - Checking for valid queries and schema compatibility for deliverable
+2025-10-24 13:13:51,087 - INFO - Checking for schema changes in FPModel 17896
+2025-10-24 13:13:52,735 - INFO - Creating FPModelVersion for 'corporate_geo_testtriplecrowncentral_v38_deliverable' if it does not exist for the specified configuration ..
+2025-10-24 13:13:53,367 - INFO - Waiting for FPModelVersion 698134 to complete ..
+2025-10-24 13:13:53,744 - INFO - Current record state is None. Checking again in 30 seconds ..
+2025-10-24 13:14:24,107 - INFO - Current record state is running. Checking again in 30 seconds ..
+2025-10-24 13:14:54,526 - INFO - Current record state is running. Checking again in 30 seconds ..
+2025-10-24 13:15:24,873 - INFO - Current record state is running. Checking again in 30 seconds ..
+2025-10-24 13:15:55,265 - INFO - Record was successfully processed
+2025-10-24 13:17:16,202 - INFO - Record was successfully processed
+2025-10-24 13:17:23,852 - INFO - Creating FPMaterialization for FPModelVersion 698134 ..
+2025-10-24 13:17:25,105 - INFO - Triggered FPMaterialization 589497
+2025-10-24 13:17:25,106 - INFO - Waiting for FPMaterialization 589497 to complete ..
+2025-10-24 13:17:25,444 - INFO - Current record state is None. Checking again in 45 seconds ..
+2025-10-24 13:18:10,808 - INFO - Current record state is running. Checking again in 45 seconds ..
+2025-10-24 13:18:56,188 - INFO - Current record state is running. Checking again in 45 seconds ..
+2025-10-24 13:19:41,559 - INFO - Current record state is running. Checking again in 45 seconds ..
+2025-10-24 13:20:26,945 - INFO - Current record state is running. Checking again in 45 seconds ..
+2025-10-24 13:21:12,308 - INFO - Current record state is running. Checking again in 45 seconds ..
+2025-10-24 13:21:59,704 - INFO - Record was successfully processed
+2025-10-24 13:23:06,723 - INFO - Updating schedule for FPMaterialization 589497 ..
