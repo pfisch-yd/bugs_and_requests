@@ -22,8 +22,11 @@ from yipit_databricks_utils.future import create_table
 
 spark = SparkSession.builder.getOrCreate()
 
-# Load setup functions
-%run "/Workspace/Corporate Sensitive - Dashboard Templates/corporate_transformation_blueprints/corporate_transformation_blueprints/retail_analytics_platform/core/setup"
+
+
+# COMMAND ----------
+
+# MAGIC %run "/Workspace/Corporate Sensitive - Dashboard Templates/corporate_transformation_blueprints/corporate_transformation_blueprints/retail_analytics_platform/core/setup"
 
 # COMMAND ----------
 
@@ -33,11 +36,11 @@ DEMO_NAME = "weber"
 CATALOG = "yd_sensitive_corporate"
 FILTER_ITEMS_SCHEMA = "ydx_internal_analysts_sandbox"
 SKU_TIME_SERIES_SCHEMA = "ydx_internal_analysts_gold"
-PRODUCT_ID = "web_description"
+PRODUCT_ID = "sku"
 
 # Full table names
 FILTER_ITEMS_TABLE = f"{CATALOG}.{FILTER_ITEMS_SCHEMA}.{DEMO_NAME}_v38_filter_items"
-OUTPUT_TABLE = f"{CATALOG}.{SKU_TIME_SERIES_SCHEMA}.{DEMO_NAME}_v38_sku_time_series_debug"
+OUTPUT_TABLE = f"{CATALOG}.{SKU_TIME_SERIES_SCHEMA}.{DEMO_NAME}_v38_sku_time_series"
 
 print(f"Configuration:")
 print(f"  Demo Name: {DEMO_NAME}")
@@ -51,25 +54,26 @@ print(f"  Output: {OUTPUT_TABLE}")
 def get_client_config(demo_name):
     """
     Retrieve client configuration from data_solutions.client_info table
+    Returns a dictionary with sandbox_schema and other relevant config
     """
     try:
+        # Try to query the client_info table
         client_info_df = spark.sql(f"""
             SELECT *
-            FROM data_solutions.client_info
-            WHERE LOWER(demo_name) = LOWER('{demo_name}')
-            OR LOWER(client_name) = LOWER('{demo_name}')
+            FROM data_solutions_sandbox.corporate_clients_info
+            WHERE demo_name = '{demo_name}'
+            OR LOWER(demo_name) = LOWER('{demo_name}')
         """)
 
-        if client_info_df.count() > 0:
-            config = client_info_df.first().asDict()
-            print(f"✓ Configuration found for {demo_name}")
-            return config
-        else:
-            print(f"⚠️  No configuration found for {demo_name}")
-            return None
+        # Convert to dictionary
+        config = client_info_df.first().asDict()
+        print(f"✓ Configuration found for {demo_name}")
+        print(f"  Sandbox Schema: {config.get('sandbox_schema', 'N/A')}")
+
+        return config
 
     except Exception as e:
-        print(f"❌ Error retrieving config: {str(e)}")
+        print(f"❌ Error retrieving config for {demo_name}: {str(e)}")
         return None
 
 # Test the function
