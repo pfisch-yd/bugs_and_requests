@@ -9,15 +9,48 @@
 
 # COMMAND ----------
 
+# MAGIC %run "/Workspace/Corporate Sensitive - Dashboard Templates/corporate_transformation_blueprints/corporate_transformation_blueprints/retail_analytics_platform/core/setup"
+
+# COMMAND ----------
+
 # DBTITLE 1,Setup and Imports
 import pyspark.sql.functions as F
 from pyspark.sql import SparkSession
+from yipit_databricks_utils.future import create_table
 
 spark = SparkSession.builder.getOrCreate()
 
 # Test catalog and schema
 TEST_CATALOG = "ydx_internal_analysts_sandbox"
-TEST_SCHEMA = "default"  # Adjust if needed
+TEST_SCHEMA = "ydx_internal_analysts_sandbox"  # Adjust if needed
+
+# COMMAND ----------
+
+# DBTITLE 1,Function: Get Client Config from Database
+def get_client_config(demo_name):
+    """
+    Retrieve client configuration from data_solutions.client_info table
+    Returns a dictionary with sandbox_schema and other relevant config
+    """
+    try:
+        # Try to query the client_info table
+        client_info_df = spark.sql(f"""
+            SELECT *
+            FROM data_solutions_sandbox.corporate_clients_info
+            WHERE demo_name = '{demo_name}'
+            OR LOWER(demo_name) = LOWER('{demo_name}')
+        """)
+
+        # Convert to dictionary
+        config = client_info_df.first().asDict()
+        print(f"✓ Configuration found for {demo_name}")
+        print(f"  Sandbox Schema: {config.get('sandbox_schema', 'N/A')}")
+
+        return config
+
+    except Exception as e:
+        print(f"❌ Error retrieving config for {demo_name}: {str(e)}")
+        return None
 
 # COMMAND ----------
 
@@ -26,65 +59,17 @@ TEST_SCHEMA = "default"  # Adjust if needed
 clients_config = {
     'weber': {
         'demo_name': 'weber',
-        'sandbox_schema': 'yd_sensitive_corporate'  # Update based on actual config
+        'sandbox_schema': get_client_config('weber')['sandbox_schema']  # Update based on actual config
     },
     'werner': {
         'demo_name': 'werner',
-        'sandbox_schema': 'yd_sensitive_corporate'  # Update based on actual config
+        'sandbox_schema': get_client_config('werner')['sandbox_schema']  # Update based on actual config
     },
     'odele': {
         'demo_name': 'odele',
-        'sandbox_schema': 'yd_sensitive_corporate'  # Update based on actual config
+        'sandbox_schema': get_client_config('odele')['sandbox_schema']  # Update based on actual config
     }
 }
-
-# COMMAND ----------
-
-# DBTITLE 1,Function: Get Client Config from Database
-def get_client_config_from_db(demo_name):
-    """
-    Retrieve client configuration from data_solutions.client_info table
-    """
-    try:
-        client_info_df = spark.sql(f"""
-            SELECT *
-            FROM data_solutions.client_info
-            WHERE LOWER(demo_name) = LOWER('{demo_name}')
-            OR LOWER(client_name) = LOWER('{demo_name}')
-        """)
-
-        if client_info_df.count() > 0:
-            config = client_info_df.first().asDict()
-            return {
-                'demo_name': demo_name,
-                'sandbox_schema': config.get('sandbox_schema', 'yd_sensitive_corporate')
-            }
-        else:
-            print(f"⚠️  Config not found in database for {demo_name}, using default")
-            return {
-                'demo_name': demo_name,
-                'sandbox_schema': 'yd_sensitive_corporate'
-            }
-
-    except Exception as e:
-        print(f"⚠️  Error getting config for {demo_name}: {str(e)}")
-        return {
-            'demo_name': demo_name,
-            'sandbox_schema': 'yd_sensitive_corporate'
-        }
-
-# COMMAND ----------
-
-# DBTITLE 1,Update Client Configs from Database
-print("Fetching client configurations from database...")
-print("=" * 80)
-
-for client_name in clients_config.keys():
-    db_config = get_client_config_from_db(client_name)
-    clients_config[client_name].update(db_config)
-    print(f"✓ {client_name}: sandbox_schema = {clients_config[client_name]['sandbox_schema']}")
-
-print("=" * 80)
 
 # COMMAND ----------
 
@@ -94,7 +79,7 @@ def copy_filter_items_to_test(demo_name, sandbox_schema, test_catalog=TEST_CATAL
     Copy _v38_filter_items table from production to test catalog
     """
     source_table = f"{sandbox_schema}.{demo_name}_v38_filter_items"
-    dest_table = f"{test_catalog}.{test_schema}.{demo_name}_v38_filter_items"
+    dest_table = f"ydx_internal_analysts_sandbox.{demo_name}_v38_filter_items"
 
     print(f"\n{'='*80}")
     print(f"COPYING TABLE FOR: {demo_name.upper()}")
@@ -117,12 +102,9 @@ def copy_filter_items_to_test(demo_name, sandbox_schema, test_catalog=TEST_CATAL
         print(f"\nHas product_attributes column: {has_product_attrs}")
 
         # Create or replace table in test catalog
+        # 
         print(f"\nCopying table...")
-        source_df.write \
-            .format("delta") \
-            .mode("overwrite") \
-            .option("overwriteSchema", "true") \
-            .saveAsTable(dest_table)
+        create_table_with_variant_support("prep_filter_items", "ydx_internal_analysts_sandbox", f"{demo_name}_v38_filter_items", source_df, overwrite=True, variant_columns=['product_attributes'])
 
         # Verify copy
         dest_df = spark.table(dest_table)
@@ -158,6 +140,9 @@ for client_name, config in clients_config.items():
     )
     results[client_name] = success
 
+    print(config['demo_name'])
+    print(config['sandbox_schema'])
+
 # COMMAND ----------
 
 # DBTITLE 1,Summary
@@ -181,11 +166,12 @@ print("VERIFICATION: CHECKING PRODUCT_ATTRIBUTES IN COPIED TABLES")
 print("=" * 80)
 
 for client_name, config in clients_config.items():
-    dest_table = f"{TEST_CATALOG}.{TEST_SCHEMA}.{config['demo_name']}_v38_filter_items"
+    dest_table = f"{TEST_SCHEMA}.{config['demo_name']}_v38_filter_items"
 
     try:
-        df = spark.table(dest_table)
-
+        print(dest_table)
+        
+        df = spark.sql(f"select * from {dest_table}")
         if 'product_attributes' in df.columns:
             # Check for category-related terms in product_attributes
             attrs_json = df.filter(F.col('product_attributes').isNotNull()) \
@@ -203,11 +189,14 @@ for client_name, config in clients_config.items():
                 if count_with_keyword > 0:
                     pct = (count_with_keyword / total_with_attrs * 100) if total_with_attrs > 0 else 0
                     print(f"  ⚠️  '{keyword}' found in {count_with_keyword:,} records ({pct:.2f}%)")
-
     except Exception as e:
         print(f"\n{client_name.upper()}: ❌ Error - {str(e)}")
 
 print("\n" + "=" * 80)
+
+# COMMAND ----------
+
+"yd_sensitive_corporate.ydx_internal_analysts_sandbox.odele_v38_filter_items"
 
 # COMMAND ----------
 
@@ -218,7 +207,7 @@ print("SAMPLE RECORDS WITH PRODUCT_ATTRIBUTES")
 print("=" * 80)
 
 for client_name, config in clients_config.items():
-    dest_table = f"{TEST_CATALOG}.{TEST_SCHEMA}.{config['demo_name']}_v38_filter_items"
+    dest_table = f"ydx_internal_analysts_sandbox.{config['demo_name']}_v38_filter_items"
 
     try:
         df = spark.table(dest_table)
