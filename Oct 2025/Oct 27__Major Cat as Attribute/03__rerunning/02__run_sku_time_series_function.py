@@ -208,7 +208,7 @@ print("6.")
 # MAGIC %sql
 # MAGIC
 # MAGIC select  product_attributes from 
-# MAGIC yd_sensitive_corporate.ydx_internal_analysts_sandbox.weber_v38_sku_time_series
+# MAGIC yd_sensitive_corporate.ydx_internal_analysts_gold.weber_v38_sku_time_series
 # MAGIC
 # MAGIC where product_attributes is not null
 
